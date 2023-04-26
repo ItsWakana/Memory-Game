@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import CardBoard from './components/CardBoard';
+import style from './index.css';
 
 function App() {
 
@@ -9,29 +11,60 @@ function App() {
 
   const [gameStarted, setGameStarted] = useState(false);
 
+  const reorderCards = () => {
+
+    const shuffledArray = [...cards];
+
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+    }
+    return shuffledArray;
+  }
+
+  const playRound = (clickedCard) => {
+
+    if (clickedCard.clicked) {
+      console.log('You fail');
+      return;
+    }
+
+    const shuffledArray = reorderCards();
+
+    const updatedCards = shuffledArray.map((card) => {
+      if (card === clickedCard) {
+        return {
+          ...card,
+          clicked: true
+        }
+      }
+      return card;
+    });
+
+    setCards(updatedCards);
+
+  }
+
   const handleGameStart = () => {
     setGameStarted(true);
 
     setCards([
-      {data: 1, desc: 'Zebra'},
-      {data: 2, desc: 'Frog'},
-      {data: 3, desc: 'Dog'},
-      {data: 4, desc: 'Cat'},
-      {data: 5, desc: 'Horse'},
-      {data: 6, desc: 'Camel'},
+      { data: 1, desc: 'Zebra', clicked: false },
+      { data: 2, desc: 'Frog', clicked: false },
+      { data: 3, desc: 'Dog', clicked: false },
+      { data: 4, desc: 'Cat', clicked: false },
+      { data: 5, desc: 'Horse', clicked: false },
+      { data: 6, desc: 'Camel', clicked: false },
     ])
   }
+
   return (
     <>
       {gameStarted ? (
         // <Scoreboard current={currentScore} best={bestScore} />
-        // <CardBoard gameCards={cards} reorder={reorderCards}/>
-        <div>
-          <h1>Memory Game</h1>
-          {cards.map((card) => (
-            <div key={card.data}>{card.desc}</div>
-          ))}
-        </div>
+        <CardBoard gameCards={cards} reorder={reorderCards}
+         play={playRound}/>
+
 
       ) : (
         <div>
