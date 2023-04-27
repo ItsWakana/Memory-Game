@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import CardBoard from './components/CardBoard';
+import Scoreboard from './components/Scoreboard';
 import style from './index.css';
 
 function App() {
@@ -22,13 +23,33 @@ function App() {
     return shuffledArray;
   }
 
+  const resetRound = () => {
+    setCurrentScore(0);
+
+    const resetCards = cards.map((card) => {
+      return {
+        ...card,
+        clicked: false
+      }
+    });
+
+    return resetCards;
+  }
+
   const playRound = (clickedCard) => {
 
     if (clickedCard.clicked) {
-      console.log('You fail');
+      const resetCards = resetRound();
+
+      setCards(resetCards);
+
+      if (currentScore > bestScore) {
+        setBestScore(currentScore);
+      }
       return;
     }
 
+    setCurrentScore(currentScore + 1);
     const shuffledArray = reorderCards();
 
     const updatedCards = shuffledArray.map((card) => {
@@ -61,21 +82,17 @@ function App() {
   return (
     <>
       {gameStarted ? (
-        // <Scoreboard current={currentScore} best={bestScore} />
-        <CardBoard gameCards={cards} reorder={reorderCards}
-         play={playRound}/>
-
-
+        <div>
+          <Scoreboard current={currentScore} best={bestScore} />
+          <CardBoard gameCards={cards} reorder={reorderCards}
+          play={playRound}/>
+        </div>
       ) : (
         <div>
           <button onClick={handleGameStart}>Start Game</button>
         </div>
       )}
     </>
-
-    //We should have a scoreboard component in here for displaying our current score and the best score that we have so far.
-
-    //Storing the state of the current score and the best score should probably be as high up in the tree as possible. So we can pass it down. 
   )
 }
 

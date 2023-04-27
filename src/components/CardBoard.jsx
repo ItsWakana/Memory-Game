@@ -11,7 +11,7 @@ const CardBoard = (props) => {
       <div className="card-container">
       {props.gameCards.map((card) => (
         <div className="card-container__card" key={card.data}
-         onClick={() => props.play(card)}>{card.desc} {card.clicked ? 'Clicked' : 'Not clicked'}</div>
+         onClick={() => props.play(card)}>{card.desc}</div>
       ))}
     </div>
   )
