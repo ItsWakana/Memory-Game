@@ -66,16 +66,38 @@ function App() {
 
   }
 
+  const handleDisplayVisibility = (hoveredCard) => {
+
+
+    const updatedCards = cards.map((card) => {
+      if (hoveredCard === card) {
+        return {
+          ...card,
+          detail: !card.detail,
+        }
+      }
+      return card;
+    });
+
+    setCards(updatedCards);
+  } 
+
   const handleGameStart = () => {
     setGameStarted(true);
 
     setCards([
-      { data: 1, desc: 'Zebra', clicked: false },
-      { data: 2, desc: 'Frog', clicked: false },
-      { data: 3, desc: 'Dog', clicked: false },
-      { data: 4, desc: 'Cat', clicked: false },
-      { data: 5, desc: 'Horse', clicked: false },
-      { data: 6, desc: 'Camel', clicked: false },
+      { data: 1, desc: 'badger', clicked: false, detail: false },
+      { data: 2, desc: 'capybara', clicked: false, detail: false },
+      { data: 3, desc: 'cat', clicked: false, detail: false },
+      { data: 4, desc: 'cow', clicked: false, detail: false },
+      { data: 5, desc: 'deer', clicked: false, detail: false },
+      { data: 6, desc: 'dog', clicked: false, detail: false },
+      { data: 7, desc: 'frog', clicked: false, detail: false },
+      { data: 8, desc: 'hamster', clicked: false, detail: false },
+      { data: 9, desc: 'horse', clicked: false, detail: false },
+      { data: 10, desc: 'panda', clicked: false, detail: false },
+      { data: 11, desc: 'sloth', clicked: false, detail: false },
+      { data: 12, desc: 'squirrel', clicked: false, detail: false },
     ])
   }
 
@@ -85,7 +107,7 @@ function App() {
         <div>
           <Scoreboard current={currentScore} best={bestScore} />
           <CardBoard gameCards={cards} reorder={reorderCards}
-          play={playRound}/>
+          play={playRound} visibility={handleDisplayVisibility}/>
         </div>
       ) : (
         <div>

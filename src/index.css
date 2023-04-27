@@ -6,17 +6,37 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: rgb(255, 255, 255);
 }
 .card-container {
     display: flex;
-    gap: 20px;
+    justify-content: center;
+    gap: 14px;
     flex-wrap: wrap;
 }
 .card-container__card {
-    background: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: rgb(16, 14, 20);
     border-radius: 4px;
     padding: 25px;
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     cursor: pointer;
+}
+
+.card__info {
+    position: absolute;
+    background-color: black;
+    bottom: 0;
+    width: 100%;
+    height: 20%;
+    color: white;
+    font-weight: bold;
+}
+
+.card__image {
+    width: 180px;
 }
