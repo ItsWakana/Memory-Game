@@ -2,7 +2,13 @@ import { useState } from 'react'
 import CardBoard from './components/CardBoard';
 import Scoreboard from './components/Scoreboard';
 import style from './index.css';
+<<<<<<< HEAD
 import cardDetails from './cards.json'
+=======
+
+import { debounce } from 'lodash';
+
+>>>>>>> main
 function App() {
 
   const [currentScore, setCurrentScore] = useState(0);
