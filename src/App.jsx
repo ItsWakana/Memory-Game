@@ -2,7 +2,7 @@ import { useState } from 'react'
 import CardBoard from './components/CardBoard';
 import Scoreboard from './components/Scoreboard';
 import style from './index.css';
-
+import cardDetails from './cards.json'
 function App() {
 
   const [currentScore, setCurrentScore] = useState(0);
@@ -64,41 +64,12 @@ function App() {
 
     setCards(updatedCards);
 
-  }
-
-  const handleDisplayVisibility = (hoveredCard) => {
-
-
-    const updatedCards = cards.map((card) => {
-      if (hoveredCard === card) {
-        return {
-          ...card,
-          detail: !card.detail,
-        }
-      }
-      return card;
-    });
-
-    setCards(updatedCards);
   } 
 
   const handleGameStart = () => {
     setGameStarted(true);
 
-    setCards([
-      { data: 1, desc: 'badger', clicked: false, detail: false },
-      { data: 2, desc: 'capybara', clicked: false, detail: false },
-      { data: 3, desc: 'cat', clicked: false, detail: false },
-      { data: 4, desc: 'cow', clicked: false, detail: false },
-      { data: 5, desc: 'deer', clicked: false, detail: false },
-      { data: 6, desc: 'dog', clicked: false, detail: false },
-      { data: 7, desc: 'frog', clicked: false, detail: false },
-      { data: 8, desc: 'hamster', clicked: false, detail: false },
-      { data: 9, desc: 'horse', clicked: false, detail: false },
-      { data: 10, desc: 'panda', clicked: false, detail: false },
-      { data: 11, desc: 'sloth', clicked: false, detail: false },
-      { data: 12, desc: 'squirrel', clicked: false, detail: false },
-    ])
+    setCards(cardDetails);
   }
 
   return (
@@ -107,7 +78,7 @@ function App() {
         <div>
           <Scoreboard current={currentScore} best={bestScore} />
           <CardBoard gameCards={cards} reorder={reorderCards}
-          play={playRound} visibility={handleDisplayVisibility}/>
+          play={playRound}/>
         </div>
       ) : (
         <div>
