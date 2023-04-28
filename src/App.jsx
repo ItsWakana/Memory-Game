@@ -3,6 +3,8 @@ import CardBoard from './components/CardBoard';
 import Scoreboard from './components/Scoreboard';
 import style from './index.css';
 
+import { debounce } from 'lodash';
+
 function App() {
 
   const [currentScore, setCurrentScore] = useState(0);

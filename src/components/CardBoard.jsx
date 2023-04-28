@@ -8,18 +8,20 @@ const CardBoard = (props) => {
   },[]);
   
   return (
-      <div className="card-container">
+    <div className="card-container">
       {props.gameCards.map((card) => (
         <div className="card-container__card" key={card.data}
-         onClick={() => props.play(card)}>
+        onClick={() => props.play(card)}
+        onMouseEnter={() => props.visibility(card)}
+        onMouseLeave={() => props.visibility(card)}>
           <img className="card__image" 
           src={`/images/${card.data}.jpeg`} 
-          onMouseOver={() => props.visibility(card)}></img>
+          ></img>
 
           {card.detail ? (
             <div className="card__info">{card.desc}</div>
           ) : null}
-         </div>
+        </div>
       ))}
     </div>
   )
