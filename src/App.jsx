@@ -76,7 +76,7 @@ function App() {
   return (
     <>
       {gameStarted ? (
-        <div>
+        <div className="main-container">
           <Scoreboard current={currentScore} best={bestScore} />
           <CardBoard gameCards={cards} reorder={reorderCards}
           play={playRound}/>

@@ -5,7 +5,7 @@ const Scoreboard = (props) => {
     const { current, best } = props;
 
     return (
-        <div>
+        <div className="scoreboard">
             <p>Current: {current}</p>
             <p>Best: {best}</p>
         </div>
