@@ -83,6 +83,7 @@ function App() {
         </div>
       ) : (
         <div>
+          <h1 className="game-title">Memory Game</h1>
           <button onClick={handleGameStart}>Start Game</button>
         </div>
       )}
