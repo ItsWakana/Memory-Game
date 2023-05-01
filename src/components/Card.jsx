@@ -4,16 +4,26 @@ const Card = (props) => {
 
     const [hovered, setHovered] = useState(false);
 
-    const handleHover = () => {
-        setHovered((prevState) => !prevState);
+    const handleHoverIn = () => {
+        setHovered(true);
     }
+
+    const handleHoverOut = () => {
+        setHovered(false);
+    }
+
+    const handleCardClick = (card) => {
+        props.play(card);
+        handleHoverOut(false);
+    }
+
     const { card } = props;
 
     return (
         <div className="card-container__card" key={card.data}
-        onClick={() => props.play(card)}
-        onMouseEnter={handleHover}
-        onMouseLeave={handleHover}>
+        onClick={() => handleCardClick(card)}
+        onMouseEnter={handleHoverIn}
+        onMouseLeave={handleHoverOut}>
             <img className="card__image" 
             src={`/images/${card.data}.jpeg`} 
             ></img>
