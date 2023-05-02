@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useReducer } from 'react'
 import CardBoard from './components/CardBoard';
 import Scoreboard from './components/Scoreboard';
 import style from './index.css';
@@ -6,85 +6,70 @@ import cardDetails from './cards.json'
 
 function App() {
 
-  const [currentScore, setCurrentScore] = useState(0);
-  const [bestScore, setBestScore] = useState(0);
-
-  const [cards, setCards] = useState([]);
-
-  const [gameStarted, setGameStarted] = useState(false);
-
-  const reorderCards = () => {
-
-    const shuffledArray = [...cards];
-
-    for (let i = shuffledArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
-    }
-    return shuffledArray;
+  const initialState = {
+    currentScore: 0,
+    bestScore: 0,
+    cards: [],
+    gameStarted: false
   }
 
-  const resetRound = () => {
-    setCurrentScore(0);
+  const [{currentScore, bestScore, cards, gameStarted}, dispatch] = useReducer(reducer, initialState);
 
-    const resetCards = cards.map((card) => {
-      return {
-        ...card,
-        clicked: false
-      }
-    });
-
-    return resetCards;
-  }
-
-  const playRound = (clickedCard) => {
-
-    if (clickedCard.clicked) {
-      const resetCards = resetRound();
-
-      setCards(resetCards);
-
-      if (currentScore > bestScore) {
-        setBestScore(currentScore);
-      }
-      return;
-    }
-
-    setCurrentScore(currentScore + 1);
-    const shuffledArray = reorderCards();
-
-    const updatedCards = shuffledArray.map((card) => {
-      if (card === clickedCard) {
+  function reducer(state, action) {
+    switch (action.type) {
+      case 'UPDATE_CURRENT_SCORE':
         return {
-          ...card,
-          clicked: true
+          ...state,
+          currentScore: state.currentScore + 1
         }
-      }
-      return card;
-    });
-
-    setCards(updatedCards);
-
-  } 
-
-  const handleGameStart = () => {
-    setGameStarted(true);
-
-    setCards(cardDetails);
+      case 'RESET_CURRENT_SCORE': 
+        return {
+          ...state,
+          currentScore: 0,
+        }
+      case 'UPDATE_BEST_SCORE':
+        if (state.currentScore > state.bestScore) {
+          return {
+            ...state,
+            bestScore: state.currentScore
+          }
+        }
+        return state;
+      case 'RESET_ROUND':
+        return {
+          ...state,
+          currentScore: 0,
+          cards: action.payload.resetCardClick
+        }
+      case 'SHUFFLE_CARDS': 
+        return {
+          ...state,
+          cards: action.payload.shuffledCards
+        }
+      case 'START_GAME': 
+        return {
+          ...state,
+          gameStarted: true,
+          cards: cardDetails
+        }
+      default:
+        return state;
+    }
   }
 
   return (
     <>
       {gameStarted ? (
         <div className="main-container">
-          <Scoreboard current={currentScore} best={bestScore} />
-          <CardBoard gameCards={cards} reorder={reorderCards}
-          play={playRound}/>
+          <Scoreboard scores={{currentScore, bestScore}} />
+          <CardBoard gameCards={cards} dispatch={dispatch}/>          
         </div>
       ) : (
         <div>
           <h1 className="game-title">Memory Game</h1>
-          <button onClick={handleGameStart}>Start Game</button>
+          <button onClick={() => dispatch({
+            type: 'START_GAME'
+          })}>Start Game</button>
         </div>
       )}
     </>

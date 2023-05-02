@@ -12,16 +12,11 @@ const Card = (props) => {
         setHovered(false);
     }
 
-    const handleCardClick = (card) => {
-        props.play(card);
-        handleHoverOut(false);
-    }
-
     const { card } = props;
 
     return (
         <div className="card-container__card" key={card.data}
-        onClick={() => handleCardClick(card)}
+        onClick={() => props.play(card)}
         onMouseEnter={handleHoverIn}
         onMouseLeave={handleHoverOut}>
             <img className="card__image" 
