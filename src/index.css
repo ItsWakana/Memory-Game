@@ -2,9 +2,9 @@
     font-family: Arial, Helvetica, sans-serif;
     box-sizing: border-box;
 
-    --background-clr: #17293d;
-    --card-background-clr: #1f3853;
-    --score-background-clr: #17293d;
+    --background-clr: #09090a;
+    --card-background-clr: #1a1a1b;
+    --score-background-clr: #1a1a1b;
 }
 
 body {
