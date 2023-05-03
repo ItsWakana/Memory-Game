@@ -2,8 +2,9 @@
     font-family: Arial, Helvetica, sans-serif;
     box-sizing: border-box;
 
-    --background-clr: rgb(184, 184, 184);
-    --card-background-clr: rgb(233, 233, 233);
+    --background-clr: #17293d;
+    --card-background-clr: #1f3853;
+    --score-background-clr: #17293d;
 }
 
 body {
@@ -11,7 +12,7 @@ body {
     margin: 0;
     padding: 0;
     text-align: center;
-    padding-top: 80px;
+    padding-top: 100px;
 }
 
 .game-title {
@@ -19,10 +20,11 @@ body {
 }
 
 .scoreboard {
-    background-color: var(--card-background-clr);
+    background-color: var(--score-background-clr);
+    color: white;
     padding: 10px 0 3px 0;
     font-weight: bold;
-    box-shadow: 0px 5px 13px -10px #000000;
+    box-shadow: 0px 5px 13px -7px #000000;
     position: fixed;
     top: 0;
     left: 0;
@@ -47,7 +49,7 @@ body {
     align-items: flex-start;
     position: relative;
     background: var(--card-background-clr);
-    border-radius: 4px;
+    border-radius: 7px;
     padding-top: 20px;
     width: 200px;
     height: 250px;
@@ -59,7 +61,7 @@ body {
 .card__info {
     position: absolute;
     background-color: black;
-    border-radius: 4px;
+    border-radius: 7px;
     opacity: 0;
     bottom: 0;
     top: 0;
