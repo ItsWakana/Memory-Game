@@ -7,8 +7,6 @@ import cardDetails from './cards.json'
 function App() {
 
   const initialState = {
-    // currentScore: 0,
-    // bestScore: 0,
     cards: [],
     gameStarted: false
   }
@@ -24,28 +22,9 @@ function App() {
   }
   function reducer(state, action) {
     switch (action.type) {
-      // case 'UPDATE_CURRENT_SCORE':
-      //   return {
-      //     ...state,
-      //     currentScore: state.currentScore + 1
-      //   }
-      // case 'RESET_CURRENT_SCORE': 
-      //   return {
-      //     ...state,
-      //     currentScore: 0,
-      //   }
-      // case 'UPDATE_BEST_SCORE':
-      //   if (state.currentScore > state.bestScore) {
-      //     return {
-      //       ...state,
-      //       bestScore: state.currentScore
-      //     }
-      //   }
-      //   return state;
       case 'RESET_ROUND':
         return {
           ...state,
-          // currentScore: 0,
           cards: action.payload.resetCardClick
         }
       case 'SHUFFLE_CARDS': 
@@ -74,7 +53,9 @@ function App() {
       ) : (
         <div>
           <h1 className="game-title">Memory Game</h1>
-          <button onClick={() => dispatch({
+          <button 
+          className="start-button" 
+          onClick={() => dispatch({
             type: 'START_GAME'
           })}>Start Game</button>
         </div>
