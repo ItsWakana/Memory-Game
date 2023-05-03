@@ -56,7 +56,13 @@ body {
     cursor: pointer;
     -webkit-box-shadow: 6px 9px 13px -13px #000000; 
     box-shadow: 6px 9px 13px -13px #000000;
+    transform-style: preserve-3d;
+    transition: transform 0.8s;
 }
+
+/* .card-container__card:hover {
+    transform: rotateY(180deg);
+} */
 
 .card__info {
     position: absolute;

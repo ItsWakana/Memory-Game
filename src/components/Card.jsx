@@ -19,6 +19,12 @@ const Card = (props) => {
         onClick={() => props.play(card)}
         onMouseEnter={handleHoverIn}
         onMouseLeave={handleHoverOut}>
+
+            {/* {!hovered && (
+                <img className="card__image" 
+                src={`/images/${card.data}.jpeg`} 
+                ></img>
+            )} */}
             <img className="card__image" 
             src={`/images/${card.data}.jpeg`} 
             ></img>

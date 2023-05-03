@@ -2,12 +2,12 @@ import React from 'react';
 
 const Scoreboard = (props) => {
 
-    const { currentScore, bestScore } = props.scores;
+    const { current, best } = props;
 
     return (
         <div className="scoreboard">
-            <p>Current: {currentScore}</p>
-            <p>Best: {bestScore}</p>
+            <p>Current: {current}</p>
+            <p>Best: {best}</p>
         </div>
     )
 }

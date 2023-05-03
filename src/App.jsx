@@ -1,4 +1,4 @@
-import { useReducer } from 'react'
+import { useReducer, useRef } from 'react'
 import CardBoard from './components/CardBoard';
 import Scoreboard from './components/Scoreboard';
 import style from './index.css';
@@ -7,38 +7,45 @@ import cardDetails from './cards.json'
 function App() {
 
   const initialState = {
-    currentScore: 0,
-    bestScore: 0,
+    // currentScore: 0,
+    // bestScore: 0,
     cards: [],
     gameStarted: false
   }
 
-  const [{currentScore, bestScore, cards, gameStarted}, dispatch] = useReducer(reducer, initialState);
+  const [{cards, gameStarted}, dispatch] = useReducer(reducer, initialState);
 
+  const currentScore = cards.filter((card) => card.clicked).length;
+
+  const bestScore = useRef(0);
+
+  if (bestScore.current < currentScore) {
+    bestScore.current = currentScore;
+  }
   function reducer(state, action) {
     switch (action.type) {
-      case 'UPDATE_CURRENT_SCORE':
-        return {
-          ...state,
-          currentScore: state.currentScore + 1
-        }
-      case 'RESET_CURRENT_SCORE': 
-        return {
-          ...state,
-          currentScore: 0,
-        }
-      case 'UPDATE_BEST_SCORE':
-        if (state.currentScore > state.bestScore) {
-          return {
-            ...state,
-            bestScore: state.currentScore
-          }
-        }
-        return state;
+      // case 'UPDATE_CURRENT_SCORE':
+      //   return {
+      //     ...state,
+      //     currentScore: state.currentScore + 1
+      //   }
+      // case 'RESET_CURRENT_SCORE': 
+      //   return {
+      //     ...state,
+      //     currentScore: 0,
+      //   }
+      // case 'UPDATE_BEST_SCORE':
+      //   if (state.currentScore > state.bestScore) {
+      //     return {
+      //       ...state,
+      //       bestScore: state.currentScore
+      //     }
+      //   }
+      //   return state;
       case 'RESET_ROUND':
         return {
           ...state,
-          currentScore: 0,
+          // currentScore: 0,
           cards: action.payload.resetCardClick
         }
       case 'SHUFFLE_CARDS': 
@@ -61,7 +68,7 @@ function App() {
     <>
       {gameStarted ? (
         <div className="main-container">
-          <Scoreboard scores={{currentScore, bestScore}} />
+          <Scoreboard current={currentScore} best={bestScore.current} />
           <CardBoard gameCards={cards} dispatch={dispatch}/>          
         </div>
       ) : (

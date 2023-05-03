@@ -45,13 +45,13 @@ const CardBoard = (props) => {
       return;
     }
 
-    props.dispatch({
-      type: 'UPDATE_CURRENT_SCORE',
-    });
+    // props.dispatch({
+    //   type: 'UPDATE_CURRENT_SCORE',
+    // });
 
-    props.dispatch({
-      type: 'UPDATE_BEST_SCORE',
-    });
+    // props.dispatch({
+    //   type: 'UPDATE_BEST_SCORE',
+    // });
 
     const shuffledArray = reorderCards();
 
