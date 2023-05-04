@@ -8,7 +8,7 @@ const Card = (props) => {
 
             <div className={"card__info"}>{card.desc}</div>
             <img className="card__image"
-            src={`/images/${card.data}.jpeg`}
+            src={`${import.meta.env.BASE_URL}images/${card.data}.jpeg`}
             ></img>
         </div>
     )
