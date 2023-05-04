@@ -17,11 +17,29 @@ function App() {
 
   const bestScore = useRef(0);
 
+  const gameWinner = cards.every((card) => card.clicked);
+  if (gameStarted && gameWinner) {
+    bestScore.current = 0;
+    return (
+      <dialog open>
+        <h2>Congratulations! </h2>
+        <p>You guessed all {cards.length} of the cards without a single mistake!</p>
+        <p>Click below to have another go</p>
+        <form method="dialog">
+          <button onClick={() => dispatch({
+            type: 'RESET_GAME'
+          })}>Press me</button>
+        </form>
+      </dialog>
+    )
+  }
   if (bestScore.current < currentScore) {
     bestScore.current = currentScore;
   }
   function reducer(state, action) {
     switch (action.type) {
+      case 'RESET_GAME': 
+        return initialState;
       case 'RESET_ROUND':
         return {
           ...state,
@@ -35,7 +53,7 @@ function App() {
       case 'START_GAME': 
         return {
           ...state,
-          gameStarted: true,
+          gameStarted: !state.gameStarted,
           cards: cardDetails
         }
       default:

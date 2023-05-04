@@ -4,7 +4,7 @@ const Card = (props) => {
 
     return (
         <div className="card-container__card" key={card.data}
-        onClick={() => {props.play(card); handleHoverOut()}}>
+        onClick={() => {props.play(card)}}>
 
             <div className={"card__info"}>{card.desc}</div>
             <img className="card__image"

@@ -34,9 +34,32 @@ body {
     transition: all 0.2s;
 }
 
+dialog {
+    background: var(--card-score-clr);
+    border: none;
+    border-radius: 8px;
+    width: 30%;
+    min-width: min-content;
+    box-shadow: 6px 9px 13px -13px #000000;
+
+}
+
+dialog p,
+dialog h2 {
+    color: white;
+}
+dialog button {
+    outline: none;
+    background-color: var(--score-background-clr);
+    border: none;
+    border-radius: 7px;
+    padding: 10px 15px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
 .start-button:hover {
-    border: solid 2px #51515c;
-    transform: scale(1.05);
+    background-color: #3f3f47;
 }
 
 .scoreboard {
@@ -76,14 +99,10 @@ body {
     height: 250px;
     cursor: pointer;
     -webkit-box-shadow: 6px 9px 13px -13px #000000; 
-    box-shadow: 6px 9px 13px -13px #000000;
+    box-shadow: 15px 10px 13px -13px #000000;
     transform-style: preserve-3d;
     transition: all 0.3s;
 }
-
-/* .card-container__card:hover {
-    transform: rotateY(180deg);
-} */
 
 .card-container__card:hover {
     border: solid 4px #51515c;
